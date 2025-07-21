@@ -8,7 +8,7 @@ This repository documents the key projects and contributions made during my Summ
 - **Developed** an end-to-end Language Identification system for 10 Indian languages using a Convolutional Neural Network (CNN) architecture on Mel-Frequency Cepstral Coefficients (MFCCs).
 - **Trained and evaluated** the model on large-scale datasets, including Common Voice, to ensure robustness.
 - **Deployed** the model via a Gradio-based web interface for real-time inference from user-recorded audio.
-- <img width="656" height="792" alt="image" src="https://github.com/user-attachments/assets/bdfbd676-9cb7-46ca-bc4c-21878363401f" />
+
 
 
 ### 2. Automatic Speech Recognition (ASR) Enhancement
