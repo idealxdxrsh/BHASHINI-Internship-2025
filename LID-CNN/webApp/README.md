@@ -26,7 +26,7 @@
 ---
 
 <!-- PROJECT DEMO -->
-> **Note:** Add a GIF or screenshot of your project in action here!
+
 
 ![Project Demo GIF](./Screencastfrom2025-07-2412-16-28-ezgif.com-cut.gif)
 
