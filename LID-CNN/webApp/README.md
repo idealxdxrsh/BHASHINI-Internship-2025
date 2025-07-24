@@ -75,8 +75,8 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the Repository**
     ```sh
-    git clone [https://github.com/YOUR_USERNAME/YOUR_REPO.git](https://github.com/YOUR_USERNAME/YOUR_REPO.git)
-    cd YOUR_REPO
+    git clone [https://github.com/idealxdxrsh/BHASHINI-Internship-2025.git](https://github.com/idealxdxrsh/BHASHINI-Internship-2025.git)
+    cd BHASHINI-Internship-2025
     ```
 
 2.  **Create and Activate a Virtual Environment**
