@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian Language Identification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .file-input-container {
+            position: relative;
+            width: 100%;
+            height: 10rem; /* 160px */
+            border: 2px dashed #9ca3af; /* gray-400 */
+            border-radius: 0.5rem; /* rounded-lg */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        .file-input-container:hover {
+            background-color: #f3f4f6; /* gray-100 */
+            border-color: #6b7280; /* gray-500 */
+        }
+        #audio-file {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .loader {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .recording-pulse {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white shadow-md w-full">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <!-- Left Logo: Bhashini -->
+            <div>
+                <!-- 
+                  IMPORTANT: To use your local logo:
+                  1. Place your logo file (e.g., "bhashini_logo.png") in the same folder as this HTML file.
+                  2. Change the 'src' below to your local file's name. Example: src="bhashini_logo.png"
+                -->
+                <img src="/media/adarsh/New Volume/ubuntu_files/Bhashini_new_en.png" alt="Bhashini Logo" class="h-10">
+            </div>
+
+            <!-- Center Picture: Sound Icon -->
+            <!-- Center Picture -->
+           
+
+            <!-- Right Logo: BITS Pilani -->
+            <div>
+                <!-- 
+                  IMPORTANT: To use your local logo:
+                  1. Place your logo file (e.g., "bits_logo.png") in the same folder as this HTML file.
+                  2. Change the 'src' below to your local file's name. Example: src="bits_logo.png"
+                -->
+                <img src="/media/adarsh/New Volume/ubuntu_files/BITS_Pilani-Logo.svg.png" alt="BITS Pilani Logo" class="h-12">
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="w-full p-4">
+        <div class="w-full max-w-4xl bg-white rounded-xl shadow-lg flex overflow-hidden">
+            
+            <!-- Left Side: Image -->
+            <div class="hidden md:block md:w-1/2 bg-gray-100 p-8 flex items-center justify-center">
+                <img src="/media/adarsh/New Volume/ubuntu_files/bbb.png" 
+                     alt="Project illustration" 
+                     class="object-cover rounded-lg w-full h-full">
+            </div>
+
+            <!-- Right Side: Application -->
+            <div class="w-full md:w-1/2 p-6 md:p-8">
+                <div class="text-center mb-6">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-900">Indian Language Identification</h1>
+                    <p class="text-gray-500 mt-2">Upload an audio clip or record your voice to identify the language.</p>
+                </div>
+
+                <!-- Input Options: Upload or Record -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                    <!-- File Upload Area -->
+                    <div id="file-drop-area" class="file-input-container bg-gray-50">
+                        <input type="file" id="audio-file" accept=".wav,.mp3">
+                        <div id="file-label" class="text-center text-gray-500 p-2">
+                            <svg class="mx-auto h-10 w-10 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <p class="mt-1 text-sm"><span class="font-semibold text-blue-600">Upload a file</span></p>
+                            <p class="text-xs text-gray-400">or drag and drop</p>
+                        </div>
+                    </div>
+                    <!-- Voice Record Area -->
+                    <div class="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
+                        <button id="record-btn" class="w-16 h-16 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                            <svg id="mic-icon" class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M7 4a3 3 0 016 0v4a3 3 0 11-6 0V4zm4 10.93A7.001 7.001 0 0017 8a1 1 0 10-2 0A5 5 0 015 8a1 1 0 00-2 0 7.001 7.001 0 006 6.93V17H6a1 1 0 100 2h8a1 1 0 100-2h-3v-2.07z" clip-rule="evenodd"></path></svg>
+                            <div id="stop-icon" class="w-6 h-6 bg-white rounded hidden"></div>
+                        </button>
+                        <p id="record-status" class="text-sm text-gray-600 mt-3 font-medium">Click to Record</p>
+                    </div>
+                </div>
+                
+                <p id="file-name-display" class="text-sm text-center text-gray-600 mb-4 font-medium truncate"></p>
+
+                <!-- Predict Button -->
+                <div class="mb-6">
+                    <button id="predict-btn" class="w-full bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out disabled:bg-blue-300 disabled:cursor-not-allowed flex items-center justify-center" disabled>
+                        <span id="button-text">Predict Language</span>
+                        <div id="loader" class="loader hidden ml-3"></div>
+                    </button>
+                </div>
+
+                <div id="error-section" class="text-center p-4 bg-red-100 text-red-700 rounded-lg hidden"></div>
+
+                <div id="results-section" class="text-center p-6 bg-gray-100 rounded-lg hidden mt-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-2">Prediction Result</h2>
+                    <p class="text-3xl font-bold text-blue-700" id="predicted-language"></p>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mt-4">
+                        <div id="confidence-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2" id="confidence-text"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // All JavaScript from the previous version remains the same.
+        // It is included here for completeness.
+        const fileInput = document.getElementById('audio-file');
+        const fileDropArea = document.getElementById('file-drop-area');
+        const fileNameDisplay = document.getElementById('file-name-display');
+        const predictBtn = document.getElementById('predict-btn');
+        const buttonText = document.getElementById('button-text');
+        const loader = document.getElementById('loader');
+        const resultsSection = document.getElementById('results-section');
+        const errorSection = document.getElementById('error-section');
+        const predictedLanguage = document.getElementById('predicted-language');
+        const confidenceBar = document.getElementById('confidence-bar');
+        const confidenceText = document.getElementById('confidence-text');
+        
+        const recordBtn = document.getElementById('record-btn');
+        const recordStatus = document.getElementById('record-status');
+        const micIcon = document.getElementById('mic-icon');
+        const stopIcon = document.getElementById('stop-icon');
+
+        let selectedFile = null;
+        let mediaRecorder;
+        let audioChunks = [];
+        let isRecording = false;
+
+        fileInput.addEventListener('change', handleFileSelect);
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => fileDropArea.addEventListener(e, preventDefaults, false));
+        ['dragenter', 'dragover'].forEach(e => fileDropArea.addEventListener(e, highlight, false));
+        ['dragleave', 'drop'].forEach(e => fileDropArea.addEventListener(e, unhighlight, false));
+        fileDropArea.addEventListener('drop', handleDrop, false);
+
+        function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
+        function highlight() { fileDropArea.classList.add('bg-blue-50', 'border-blue-500'); }
+        function unhighlight() { fileDropArea.classList.remove('bg-blue-50', 'border-blue-500'); }
+
+        function handleDrop(e) {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                handleFileSelect({ target: fileInput });
+            }
+        }
+
+        function handleFileSelect(event) {
+            if (isRecording) return;
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    showError('File is too large. Please select a file smaller than 5MB.');
+                    resetUI();
+                    return;
+                }
+                selectedFile = file;
+                fileNameDisplay.textContent = `Selected: ${selectedFile.name}`;
+                predictBtn.disabled = false;
+                resetResults();
+            }
+        }
+        
+        recordBtn.addEventListener('click', toggleRecording);
+
+        async function toggleRecording() {
+            if (isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+                updateRecordingUI();
+            } else {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    isRecording = true;
+                    resetUI();
+                    updateRecordingUI();
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    mediaRecorder.ondataavailable = event => {
+                        audioChunks.push(event.data);
+                    };
+                    mediaRecorder.onstop = () => {
+                        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                        selectedFile = new File([audioBlob], "recorded_audio.wav", { type: 'audio/wav' });
+                        fileNameDisplay.textContent = 'Selected: recorded_audio.wav';
+                        predictBtn.disabled = false;
+                        stream.getTracks().forEach(track => track.stop());
+                    };
+                    mediaRecorder.start();
+                } catch (err) {
+                    showError('Could not access microphone. Please grant permission and try again.');
+                    console.error("Microphone error:", err);
+                    isRecording = false;
+                    updateRecordingUI();
+                }
+            }
+        }
+        
+        function updateRecordingUI() {
+            if (isRecording) {
+                recordStatus.textContent = 'Recording...';
+                micIcon.classList.add('hidden');
+                stopIcon.classList.remove('hidden');
+                recordBtn.classList.add('recording-pulse');
+            } else {
+                recordStatus.textContent = 'Click to Record';
+                micIcon.classList.remove('hidden');
+                stopIcon.classList.add('hidden');
+                recordBtn.classList.remove('recording-pulse');
+            }
+        }
+
+        predictBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+            setLoading(true);
+            const formData = new FormData();
+            formData.append('audio_file', selectedFile);
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/predict', {
+                    method: 'POST',
+                    body: formData,
+                });
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'Server error');
+                }
+                const result = await response.json();
+                displayResults(result.language, result.confidence);
+            } catch (error) {
+                showError(`Prediction failed: ${error.message}`);
+            } finally {
+                setLoading(false);
+            }
+        });
+        
+        function setLoading(isLoading) {
+            buttonText.textContent = isLoading ? 'Analyzing...' : 'Predict Language';
+            loader.classList.toggle('hidden', !isLoading);
+            predictBtn.disabled = isLoading;
+            if (isLoading) resetResults();
+        }
+
+        function displayResults(language, confidence) {
+            predictedLanguage.textContent = language;
+            confidenceText.textContent = `Confidence: ${confidence.toFixed(2)}%`;
+            confidenceBar.style.width = `${confidence}%`;
+            resultsSection.classList.remove('hidden');
+            errorSection.classList.add('hidden');
+        }
+        
+        function showError(message) {
+            errorSection.textContent = message;
+            errorSection.classList.remove('hidden');
+            resultsSection.classList.add('hidden');
+        }
+        
+        function resetResults() {
+            resultsSection.classList.add('hidden');
+            errorSection.classList.add('hidden');
+        }
+
+        function resetUI() {
+            selectedFile = null;
+            fileInput.value = '';
+            fileNameDisplay.textContent = '';
+            predictBtn.disabled = true;
+            resetResults();
+        }
+    </script>
+</body>
+</html>
