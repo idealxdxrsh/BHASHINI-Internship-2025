@@ -28,7 +28,7 @@
 <!-- PROJECT DEMO -->
 > **Note:** Add a GIF or screenshot of your project in action here!
 
-![Project Demo GIF](https://placehold.co/800x400/2d3748/ffffff?text=App+Screenshot+or+GIF+Here)
+![Project Demo GIF](./Screencastfrom2025-07-2412-16-28-ezgif.com-cut.gif)
 
 ---
 
