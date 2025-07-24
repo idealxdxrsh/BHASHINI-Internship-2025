@@ -80,13 +80,17 @@ To get a local copy up and running, follow these simple steps.
 
 ### Installation
 
+
 1.  **Clone the Repository**
     ```sh
     git clone [https://github.com/idealxdxrsh/BHASHINI-Internship-2025.git](https://github.com/idealxdxrsh/BHASHINI-Internship-2025.git)
     cd BHASHINI-Internship-2025
     ```
+2. **Go to the webApp folder**
+    ./LID-CNN/WebApp
+   
 
-2.  **Create and Activate a Virtual Environment**
+3.  **Create and Activate a Virtual Environment**
     ```sh
     # For Windows
     python -m venv venv
@@ -97,15 +101,15 @@ To get a local copy up and running, follow these simple steps.
     source venv/bin/activate
     ```
 
-3.  **Install Dependencies**
+4.  **Install Dependencies**
     ```sh
     pip install -r requirements.txt
     ```
 
-4.  **Download Model Weights**
+5.  **Download Model Weights**
     -   Make sure `language_identification_model.h5` is present in the `models/` directory.
 
-5.  **Run the Application**
+6.  **Run the Application**
     ```sh
     python app.py
     ```
