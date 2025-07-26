@@ -1,0 +1,11 @@
+Classification Report:
+              precision    recall  f1-score   support
+
+       hindi       0.97      0.97      0.97      2778
+   malayalam       0.97      0.98      0.97      1898
+     marathi       0.98      0.99      0.98      2865
+     punjabi       0.96      0.95      0.96       627
+
+    accuracy                           0.98      8168
+   macro avg       0.97      0.97      0.97      8168
+weighted avg       0.98      0.98      0.98      8168
